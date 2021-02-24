@@ -14,8 +14,6 @@ COPY config/supervisor/supervisor.d/php-fpm.ini /etc/supervisor.d/php-fpm.ini
 COPY config/supervisor/supervisord.conf /etc/supervisord.conf
 VOLUME /app
 WORKDIR /app
-# COPY -a src/* /app/
-# RUN composer install --no-dev -o
 EXPOSE 80
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
