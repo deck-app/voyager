@@ -19,11 +19,10 @@ jobs:
           PHP_VERSION: "8.0"
           LARAVEL_VERSION: 8
           BACK_END: nginx
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -59,7 +58,7 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
 
     Nginx-php8-laravel7:
       runs-on: ubuntu-latest
@@ -71,11 +70,10 @@ jobs:
           PHP_VERSION: "8.0"
           LARAVEL_VERSION: 7
           BACK_END: nginx
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -111,7 +109,7 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
     
     Nginx-php7-laravel8:
       runs-on: ubuntu-latest
@@ -123,11 +121,10 @@ jobs:
           PHP_VERSION: "7.4"
           LARAVEL_VERSION: 8
           BACK_END: nginx
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -163,7 +160,7 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
 
     Nginx-php7-laravel7:
       runs-on: ubuntu-latest
@@ -175,11 +172,10 @@ jobs:
           PHP_VERSION: "7.4"
           LARAVEL_VERSION: 7
           BACK_END: nginx
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -215,7 +211,7 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
 
 
     Apache-php8-laravel8:
@@ -228,11 +224,10 @@ jobs:
           PHP_VERSION: "8.0"
           LARAVEL_VERSION: 8
           BACK_END: apache
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -267,7 +262,7 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
 
     Apache-php8-laravel7:
       runs-on: ubuntu-latest
@@ -279,11 +274,10 @@ jobs:
           PHP_VERSION: "8.0"
           LARAVEL_VERSION: 7
           BACK_END: apache
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -318,7 +312,7 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
     
     Apache-php7-laravel8:
       runs-on: ubuntu-latest
@@ -330,11 +324,10 @@ jobs:
           PHP_VERSION: "7.4"
           LARAVEL_VERSION: 8
           BACK_END: apache
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -369,7 +362,7 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
 
     Apache-php7-laravel7:
       runs-on: ubuntu-latest
@@ -381,11 +374,10 @@ jobs:
           PHP_VERSION: "7.4"
           LARAVEL_VERSION: 7
           BACK_END: apache
-          LARAVEL_INSTALL: true
           XDEBUG: true
           DISPLAY_PHPERROR: true
           SERVER_ROOT:  /var/www/public
-          APP_CODE_PATH_HOST: /tmp/app/
+          APP_CODE_PATH_HOST: /tmp/voya
       - name: PHP version check
         run:  docker exec voyager_voyager_1 php -v
       - name: Mongodb driver check
@@ -420,4 +412,4 @@ jobs:
       - name: Destroy container and file
         run:  |
           docker-compose down
-          sudo rm -rf /tmp/app/
+          sudo rm -rf /tmp/voya
