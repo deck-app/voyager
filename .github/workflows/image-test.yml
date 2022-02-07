@@ -31,34 +31,36 @@ jobs:
         run: docker exec voyager_voyager_1 php -m | grep mysqli
       - name: Composer test
         run: docker exec voyager_voyager_1 composer
-      - name: Application Install
-        run:  |
-          docker exec voyager_voyager_1 rm -rf /var/www/
-          docker exec voyager_voyager_1 composer create-project --prefer-dist laravel/laravel:^8.0 .
-          docker exec voyager_voyager_1 cp /app/app.env /var/www/.env
-          docker exec voyager_voyager_1 composer require tcg/voyager
-          docker exec voyager_voyager_1 php artisan voyager:install
-          docker exec voyager_voyager_1 php artisan config:clear
-          docker exec voyager_voyager_1 php artisan migrate
-          docker exec voyager_voyager_1 php artisan voyager:install --with-dummy --force
-      - name: Directory Permissions
-        run:  docker exec voyager_voyager_1 chmod -R 777 storage
-      - name: Root Path change
-        run:  |
-          docker exec voyager_voyager_1 cp /app/default.conf /etc/nginx/conf.d/default.conf
-          docker exec voyager_voyager_1 pkill -9 php
-          docker exec voyager_voyager_1 nginx -s reload
-      - name: Root path check
-        run: |
-          docker exec voyager_voyager_1 ls -la
-          docker exec voyager_voyager_1 cat /etc/nginx/conf.d/default.conf
-      - name: Laravel test
-        run:  |
-          curl -i http://localhost:53487/
+      - name: File list
+        run:  docker exec voyager_voyager_1 ls -la /var/www/
+      # - name: Application Install
+      #   run:  |
+      #     docker exec voyager_voyager_1 rm -rf /var/www/
+      #     docker exec voyager_voyager_1 composer create-project --prefer-dist laravel/laravel:^8.0 .
+      #     docker exec voyager_voyager_1 cp /app/app.env /var/www/.env
+      #     docker exec voyager_voyager_1 composer require tcg/voyager
+      #     docker exec voyager_voyager_1 php artisan voyager:install
+      #     docker exec voyager_voyager_1 php artisan config:clear
+      #     docker exec voyager_voyager_1 php artisan migrate
+      #     docker exec voyager_voyager_1 php artisan voyager:install --with-dummy --force
+      # - name: Directory Permissions
+      #   run:  docker exec voyager_voyager_1 chmod -R 777 storage
+      # - name: Root Path change
+      #   run:  |
+      #     docker exec voyager_voyager_1 cp /app/default.conf /etc/nginx/conf.d/default.conf
+      #     docker exec voyager_voyager_1 pkill -9 php
+      #     docker exec voyager_voyager_1 nginx -s reload
+      # - name: Root path check
+      #   run: |
+      #     docker exec voyager_voyager_1 ls -la
+      #     docker exec voyager_voyager_1 cat /etc/nginx/conf.d/default.conf
+      # - name: Laravel test
+      #   run:  |
+      #     curl -i http://localhost:53487/
 
-      - name: Destroy container and file
-        run:  |
-          docker-compose down
-          sudo rm -rf /tmp/voya
+      # - name: Destroy container and file
+      #   run:  |
+      #     docker-compose down
+      #     sudo rm -rf /tmp/voya
 
     
