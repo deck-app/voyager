@@ -38,8 +38,6 @@ jobs:
           docker exec voyager_voyager_1 composer require tcg/voyager
           docker exec voyager_voyager_1 php artisan voyager:install
           docker exec voyager_voyager_1 php artisan config:clear
-          docker exec voyager_voyager_1 php artisan migrate
-          docker exec voyager_voyager_1 php artisan voyager:install --with-dummy --force
       - name: Directory Permissions
         run:  docker exec voyager_voyager_1 chmod -R 777 storage
       - name: Root Path change
