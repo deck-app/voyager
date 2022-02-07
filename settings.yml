@@ -1,29 +1,70 @@
 #User defined
 user:
-  # php_version:
-  #   label:
-  #     PHP version
-  #   hint:
-  #     Select a PHP version from the list above
-  #   type:
-  #     select
-  #   values:
-  #     - 5.6
-  #     - 5.7
-  #     - 7.2
-  #     - 8.1
-  #   target:
-  #     PHP_VERSION
+  back_end:
+    label:
+      Backend
+    hint:
+      Select a backend from the list above
+    type:
+      select
+    values:
+      - apache
+      - nginx
+    target:
+      BACK_END
+  php_version:
+    label:
+      PHP version
+    hint:
+      Select a PHP version from the list above
+    type:
+      select
+    values:
+      - 7.4
+      - "8.0"
+    target:
+      PHP_VERSION
+  
+  backend_ws:
+      disabled_post_install: true
+      label:
+        Laravel Version
+      hint:
+        Select a laravel version
+      type:
+        select
+      values:
+        - 7
+        - 8
+      target:
+        LARAVEL_VERSION
 
-  # install_xdebug:
-  #   label:
-  #     Install XDEBUG?
-  #   type:
-  #     checkbox
-  #   hint:
-  #     Check to enable XDEBUG installation
-  #   target:
-  #     INSTALL_XDEBUG
+  php_error_reporting:
+    label:
+      Enable PHP error reporting?
+    type:
+      checkbox
+    hint: Check the box to display PHP errors 
+    target:
+      DISPLAY_PHPERROR
+  php_xdebug:
+    label:
+      Enable PHP extension XDEBUG?
+    type:
+      checkbox
+    hint: Check the box to display extension xdebug
+    target:
+      XDEBUG
+  laravel_install:
+    show_on_install: true
+    label:
+      DO NOT install Laravel
+    type:
+      checkbox
+    hint: Incase you have a Laravel project already installed at the selected path
+    target:
+      LARAVEL_INSTALL
+    
   # mysql_version:
   #   label:
   #     MySQL version
@@ -43,11 +84,11 @@ user:
   #   type:
   #     input
   #   values:
-  #     /var/www/html
+  #     /var/www
   #   hint:
   #     Server document root
   #   target:
-  #     DOCUMENT_ROOT
+      # SERVER_ROOT
 
 #System defaults
 system:
@@ -55,11 +96,11 @@ system:
     true
   #For collecting and storing DB in .env
   #db/user/password
-  # db_credentials:
-  #   true
+  db_credentials:
+    true
   #Generate public ports for the docker image
   ports:
     http:
-      VOYAGER_PORT
-    others:
-      - MYSQL_PORT
+      VOYAGER_HOST_HTTP_PORT
+    other:
+      MYSQL_PORT

@@ -1,23 +1,33 @@
-version: '3.7'
- 
+version: '3'
 services:
-  app:
-    build: 
-      context: ./voyager
-    ports:
-      - ${VOYAGER_PORT}:80
+  voyager:
+    build:
+      context: '${BACK_END}'
+      dockerfile: 'Dockerfile-${PHP_VERSION}'
+      args:
+        - 'BACK_END=${BACK_END}'
+        - 'PHP_VERSION=${PHP_VERSION}'
+        - 'DISPLAY_PHPERROR=${DISPLAY_PHPERROR}'
+        - 'XDEBUG=${XDEBUG}'
+        - 'LARAVEL_VERSION=${LARAVEL_VERSION}'
+        - 'INSTALL_ADDITIONAL_EXTENSIONS=${INSTALL_ADDITIONAL_EXTENSIONS}'
+        - 'DB_NAME=${DB_NAME}'
+        - 'DB_USER=${DB_USER}'
+        - 'DB_PASSWORD=${DB_PASSWORD}'
     volumes:
-      - ${APP_CODE_PATH_HOST}:/app
-
+      - '${APP_CODE_PATH_HOST}:${APP_CODE_PATH_VOYAGER}${APP_CODE_CONTAINER_FLAG}'
+    ports:
+      - '${VOYAGER_HOST_HTTP_PORT}:80'
   mysql:
-    image: mysql:5.7.27
+    image: mariadb:10.5
     ports:
       - ${MYSQL_PORT}:3306
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
+      - 'MARIADB_DATABASE=${DB_NAME}'
+      - 'MARIADB_USER=${DB_USER}'
+      - 'MARIADB_PASSWORD=${DB_PASSWORD}'
+      - 'MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}'
     volumes:
       - db_data
-
-volumes:
+volumes: 
   db_data:

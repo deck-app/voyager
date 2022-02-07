@@ -1,33 +1,48 @@
-# Docker Laravel Starter
+# laravel
+## Introduction
+Laravel is a web application framework for PHP, released as free and open-source software under the MIT License.
 
-Basic Laravel setup with Docker:
-- MySQL
-- NGINX
-- Composer
-- Voyager Admin
+Deck Laravel Development Container has been carefully engineered to provide you and your team with a highly reproducible Laravel development environment. We hope you find the Deck Laravel Development Container useful in your quest for world domination. Happy hacking!
 
+### Install
+#### Using DECK
+Install voyager from the DECK marketplace and follow the instructions on the GUI
+#### From terminal with Docker
 
-#### 1. Clone this repository
+Clone the application directory:
+```
+$ git clone https://github.com/deck-app/voyager.git
+$ cd voyager
+```
+Edit `.env` file to change any settings before installing like php, apache, laravel versions etc
 
-`git clone https://github.com/deck-app/voyager.git`
+Finally launch the Laravel application development environment using:
+```
+$ docker-compose up -d
+```
+#### Modifying project settings
+From the DECK app, go to stack list and click on project's `More > configure > Advanced configuration` Follow the instructions below and restart your stack from the GUI
 
-#### 2. Navigate in project directory
+#### Edit Apache or Nginx configuration
+##### Apache
+httpd.conf is located at `./apache/httpd.conf`
+##### Nginx
+default.conf is located at `./nginx/default.conf`
+#### Editing php.in
+PHP ini file is located at `./apache/php_ini/php.ini`
 
-`cd voyager` 
-  
+#### Installing / removing PHP extensions
+Add / remove PHP extensions from `./apache/Dockerfile-{YOUR.PHP.VERSION}`
+````
+RUN apk add --update --no-cache bash \
+				curl \
+				curl-dev \
+				php8-intl \
+				php8-openssl \
+				php8-dba \
+				php8-sqlite3
+```
 
-#### 3. Start everything
-`docker-compose up`  
- 
-
-#### 4. Access
-Enter on http://localhost  
-
-#### 5. Install Voyager Admin
-
-- run the following to install Voyager Admin:
-
-- Access Voyager account: http://localhost/admin 
-
-    User: admin@admin.com
-    Pass: password
+#### Rebuilding from terminal
+You have to rebuild the docker image after you make any changes to the project configuration, use the snippet below to rebuild and restart the stack
+`docker-compose stop && docker-compose up --build -d`
