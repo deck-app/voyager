@@ -33,7 +33,6 @@ jobs:
         run: docker exec voyager_voyager_1 composer
       - name: Application Install
         run:  |
-          docker exec voyager_voyager_1 rm -rf /var/www/
           docker exec voyager_voyager_1 composer create-project --prefer-dist laravel/laravel:^8.0 
           docker exec voyager_voyager_1 cp /app/app.env /var/www/.env
           docker exec voyager_voyager_1 composer require tcg/voyager
