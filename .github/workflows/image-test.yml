@@ -225,8 +225,6 @@ jobs:
           docker exec voyager_voyager_1 composer create-project --prefer-dist laravel/laravel:^8.0
           docker exec voyager_voyager_1 cp /app/app.env /var/www/.env
           docker exec voyager_voyager_1 composer require tcg/voyager
-      - name: Directory Permissions
-        run:  docker exec voyager_voyager_1 chmod -R 777 storage
       - name: Documenty root change
         run:  |
           docker exec voyager_voyager_1 cp /app/httpd.conf /etc/apache2/httpd.conf
@@ -271,8 +269,6 @@ jobs:
           docker exec voyager_voyager_1 composer create-project --prefer-dist laravel/laravel:^7.0
           docker exec voyager_voyager_1 cp /app/app.env /var/www/.env
           docker exec voyager_voyager_1 composer require tcg/voyager
-      - name: Directory Permissions
-        run:  docker exec voyager_voyager_1 chmod -R 777 storage
       - name: Root Path change
         run:  |
           docker exec voyager_voyager_1 cp /app/httpd.conf /etc/apache2/httpd.conf
@@ -317,8 +313,6 @@ jobs:
           docker exec voyager_voyager_1 composer create-project --prefer-dist laravel/laravel:^8.0
           docker exec voyager_voyager_1 cp /app/app.env /var/www/.env
           docker exec voyager_voyager_1 composer require tcg/voyager
-      - name: Directory Permissions
-        run:  docker exec voyager_voyager_1 chmod -R 777 storage
       - name: Root Path change
         run:  |
           docker exec voyager_voyager_1 cp /app/httpd.conf /etc/apache2/httpd.conf
@@ -363,8 +357,6 @@ jobs:
           docker exec voyager_voyager_1 composer create-project --prefer-dist laravel/laravel:^7.0
           docker exec voyager_voyager_1 cp /app/app.env /var/www/.env
           docker exec voyager_voyager_1 composer require tcg/voyager
-      - name: Directory Permissions
-        run:  docker exec voyager_voyager_1 chmod -R 777 storage
       - name: Root Path change
         run:  |
           docker exec voyager_voyager_1 cp /app/httpd.conf /etc/apache2/httpd.conf
