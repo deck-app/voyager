@@ -1,4 +1,5 @@
 #!/bin/bash
+#!/bin/bash
 set -e
 
 if [[ -f "/var/www/composer.json" ]] ;
@@ -14,25 +15,20 @@ then
         php artisan config:clear
         php artisan clear-compiled
     else
-        echo "Composer vendor folder was not installed. Running composer install --prefer-dist --no-interaction --optimize-autoloader --no-dev"
+        echo "Composer vendor folder was not installed. Running $> composer install --prefer-dist --no-interaction --optimize-autoloader --no-dev"
         composer install --prefer-dist --no-interaction --optimize-autoloader --no-dev
     fi
 
 fi
-if [[ {LARAVEL_INSTALL} = false ]] ;
-then
-    if [[ "$(ls -A "/var/www/")" ]] ;
+if [[ "$(ls -A "/var/www/")" ]] ;
     then
         echo "Directory is not Empty, Please deleted hiden file and directory"
     else
         composer create-project --prefer-dist laravel/laravel:^{LARAVEL_VERSION}.0 .
         cp /app/app.env /var/www/.env
         composer require tcg/voyager
-        php artisan voyager:install
-        php artisan config:clear
-        php artisan migrate
         php artisan voyager:install --with-dummy --force
-    fi
+        php artisan config:clear
 fi
 echo "Application environment variable check"
 if [[ ! -f ".env" ]] ;
@@ -42,8 +38,6 @@ then
 else
     echo ".env file exit"
 fi
-echo "Application key set ...."
-php artisan key:generate
 cp /app/httpd.conf /etc/apache2/httpd.conf
 rm -rf /var/preview
 if [ "$(stat -c '%a' /var/www/storage)" == "apache:apache" ]
