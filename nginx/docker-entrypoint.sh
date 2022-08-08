@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+HOST=`hostname`
+NAME=`echo $HOST | sed 's:.*-::'`
+sudo sed -i "s/{DB_HOSTNAME}/$NAME/g" /app/app.env
+
 if [[ -f "/var/www/composer.json" ]] ;
 then
     cd /var/www/
@@ -24,8 +28,8 @@ if [[ "$(ls -A "/var/www/")" ]] ;
         echo "Directory is not Empty, Please deleted hiden file and directory"
     else
         composer create-project --prefer-dist laravel/laravel:^{LARAVEL_VERSION}.0 .
-        cp /app/app.env /var/www/.env
         composer require tcg/voyager
+        sudo cp /app/app.env /var/www/.env
         php artisan voyager:install
         php artisan config:clear
         php artisan migrate
@@ -41,13 +45,7 @@ else
 fi
 
 cp /app/default.conf /etc/nginx/conf.d/default.conf
-rm -rf /var/preview
-if [ "$(stat -c '%a' /var/www/storage)" == "nobody:nobody" ]
-then
-  echo "Storage folder already write permissions"
-else
-  chown -R nobody:nobody /var/www/storage
-fi
+sudo rm -rf /var/preview
 pkill -9 php
 nginx -s reload
 

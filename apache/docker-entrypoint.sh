@@ -2,6 +2,10 @@
 #!/bin/bash
 set -e
 
+HOST=`hostname`
+NAME=`echo $HOST | sed 's:.*-::'`
+sed -i "s/{DB_HOSTNAME}/$NAME/g" /app/env.php
+
 if [[ -f "/var/www/composer.json" ]] ;
 then
     cd /var/www/
@@ -25,8 +29,9 @@ if [[ "$(ls -A "/var/www/")" ]] ;
         echo "Directory is not Empty, Please deleted hiden file and directory"
     else
         composer create-project --prefer-dist laravel/laravel:^{LARAVEL_VERSION}.0 .
-        cp /app/app.env /var/www/.env
+        
         composer require tcg/voyager
+        sudo cp /app/app.env /var/www/.env
         php artisan voyager:install --with-dummy --force
         php artisan config:clear
 fi
@@ -34,19 +39,12 @@ echo "Application environment variable check"
 if [[ ! -f ".env" ]] ;
 then
     echo ".env file not found"
-    cp /app/app.env /var/www/.env
+    sudo cp /app/app.env /var/www/.env
 else
     echo ".env file exit"
 fi
 cp /app/httpd.conf /etc/apache2/httpd.conf
-rm -rf /var/preview
-if [ "$(stat -c '%a' /var/www/storage)" == "apache:apache" ]
-then
-  echo "Storage folder already write permissions"
-else
-  chown -R apache:apache /var/www/storage
-fi
-kill -TERM `cat /var/run/apache2/httpd.pid`
+sudo rm -rf /var/preview
 httpd -k graceful
 
 exec "$@"
