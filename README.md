@@ -1,8 +1,6 @@
-# laravel
+# Voyager
 ## Introduction
-Laravel is a web application framework for PHP, released as free and open-source software under the MIT License.
-
-Deck Laravel Development Container has been carefully engineered to provide you and your team with a highly reproducible Laravel development environment. We hope you find the Deck Laravel Development Container useful in your quest for world domination. Happy hacking!
+Laravel Admin & BREAD System (Browse, Read, Edit, Add, & Delete), supporting Laravel 6 and newer!
 
 ### Install
 #### Using DECK
@@ -14,9 +12,9 @@ Clone the application directory:
 $ git clone https://github.com/deck-app/voyager.git
 $ cd voyager
 ```
-Edit `.env` file to change any settings before installing like php, apache, laravel versions etc
+Edit `.env` file to change any settings before installing like php, apache, Voyager versions etc
 
-Finally launch the Laravel application development environment using:
+Finally launch the Voyager application development environment using:
 ```
 $ docker-compose up -d
 ```
